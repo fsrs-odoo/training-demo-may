@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="course_view_form" model="ir.ui.view">
+        <field name="name">course.view.form</field>
+        <field name="model">academy.course</field>
+        <field name="arch" type="xml">
+            <form string="Course View">
+                <header></header>
+                <sheet>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <group>
+                            <separator string="Course Settings"/>
+                            <field name="level"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <separator string="Other Fields"/>
+                            <field name="currency_id"/>
+                            <field name="base_price"/>
+                            <field name="additional_fee"/>
+                            <field name="total_price"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="course_view_list" model="ir.ui.view">
+        <field name="name">course.view.list</field>
+        <field name="model">academy.course</field>
+        <field name="arch" type="xml">
+            <tree string="Course List">
+                <field name="name"/>
+                <field name="level"/>
+                <field name="description"/>
+                <field name="create_date" optional="hide"/>
+                <field name="base_price"/>
+                <field name="additional_fee"/>
+                <field name="total_price"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="course_view_search" model="ir.ui.view">
+        <field name="name">course.view.search</field>
+        <field name="model">academy.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+                <filter name="groupby_level" string="Level" context="{'group_by':'level'}"/>
+            </search>
+        </field>
+    </record>
+<!--     Step 6 - Create Pivot -->
+    <record id="course_view_pivot" model="ir.ui.view">
+        <field name="name">course.view.pivot</field>
+        <field name="model">academy.course</field>
+        <field name="arch" type="xml">
+            <pivot>
+<!--                 [Step 8 - Add Level and name] -->
+                <field name="level" type="row"/>
+                <field name="name" type="row"/>
+<!--                 [Step 10 - Add default measures] -->
+                <field name="base_price" type="measure"/>
+                <field name="total_price" type="measure"/>
+            </pivot>
+        </field>
+    </record>            
+</odoo>
