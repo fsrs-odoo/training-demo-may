@@ -49,7 +49,11 @@
         <field name="model">academy.session</field>
         <field name="arch" type="xml">
             <tree string="Session List">
-                <field name="name"/>
+                <field name="state"/>
+                <field name="name" 
+                       decoration-warning="state == 'new'" 
+                       decoration-success="state == 'open'" 
+                       decoration-danger="state == 'cancel'"/>
                 <field name="session_number"/>
                 <field name="course_id"/>
                 <field name="instructor_id"/>
@@ -112,5 +116,102 @@
             </activity>
         </field>
     </record>    
+    <record model="ir.ui.view" id="session_view_kanban">
+        <field name="name">academy.session.kanban</field>
+        <field name="model">academy.session</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by='stage_id'>
+                <field name="instructor_id"/>
+                <field name="student_ids"/>
+                <field name="color" />
+                <templates>
+                    <div t-name="kanban-box">
+                        <!-- Makes the kanban card clickable -->
+                        <div class="oe_kanban_global_click">
+                            <div class="o_dropdown_kanban dropdown">
+                                <a class="dropdown-toggle btn" role="button" data-toggle="dropdown" title="Dropdown menu" href="#"> 
+                                    <span class="fa fa-ellipsis-v" />
+                                </a>
+                                <!-- Edit menu option -->
+                                <t t-if="widget.editable">
+                                    <a role="menuitem" type="edit"
+                                       class="dropdown-item">Edit</a>
+                                </t>
+                                <!-- Delete menu option -->
+                                <t t-if="widget.deletable">
+                                    <a role="menuitem" type="delete"
+                                       class="dropdown-item">Delete</a>
+                                </t>
+                            </div>
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_title">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                                <div class="o_kanban_image">
+                                    <img alt="Course Avatar" t-att-src="kanban_image('odoo_academy.course', 'avatar_128', record.instructor_id.raw_value)"/>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <div class="oe_kanban_details">
+                                        <div>Instructor: <field name="instructor_id"/></div>
+                                        <div><field name="date_start" widget="daterange"/> - <field name="date_end" widget="daterange"/></div>
+                                        <div><field name="student_ids"/></div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="activity_ids" widget="kanban_activity"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">  
+                                        <field name="kanban_state" widget="state_selection" options="{'hide_label': True}" />
+                                        <field name="instructor_id" widget="many2one_avatar_user"/>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"/>
+                            </div>
+                        </div>
+                    </div>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="session_view_kanban">
+        <field name="name">academy.session.kanban</field>
+        <field name="model">academy.session</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by='stage_id'>
+                <field name="instructor_id"/>
+                <field name="student_ids"/>
+                <field name="color" />
+                <templates>
+                    <div t-name="kanban-box">
+                        <!-- Makes the kanban card clickable -->
+                        <div class="oe_kanban_global_click">
+                            <div class="o_dropdown_kanban dropdown">
+                           
+                            </div>
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_title">
+                                    
+                                </div>
+                                <div class="o_kanban_image">
+                                   
+                                </div>
+                                <div class="o_kanban_record_body">
+                                   
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                    </div> 
+                                    <div class="oe_kanban_bottom_right">  
+                                    </div>
+                                </div>
+                                <div class="oe_clear"/>
+                            </div>
+                        </div>
+                    </div>
+                </templates>
+            </kanban>
+        </field>
+    </record>
     
 </odoo>

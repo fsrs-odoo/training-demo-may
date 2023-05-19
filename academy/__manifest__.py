@@ -23,6 +23,7 @@
     ],
     'demo': [
         'demo/course_demo.xml',
+        'demo/session_demo.xml',
     ],
     'application': True, 
 }

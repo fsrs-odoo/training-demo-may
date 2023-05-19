@@ -15,7 +15,7 @@
         <field name="name">Session List</field>
         <field name="res_model">academy.session</field>
 <!--         Step 8 - Add mode -->
-        <field name="view_mode">calendar,tree,form,activity</field>
+        <field name="view_mode">kanban,calendar,tree,form,activity</field>
         <field name="help" type="html">
             <p class="o_viw_nocontent_smiling_face">
                 Create the first Session.

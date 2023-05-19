@@ -7,6 +7,16 @@
             <form string="Course View">
                 <header></header>
                 <sheet>
+                    <!-- Extra section Add Smart Button in Advanced Fields -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_redirect_sessions" type="object" class="oe_stat_button" icon="fa-television icon">
+                            <div class="o_stat_info">
+                                    <field name="active_session_count" class="o_stat_value"/>
+                                    <span class="o_stat_text" attrs="{'invisible': [('active_session_count', '&lt;', 2)]}"> Active Sessions</span>
+                                    <span class="o_stat_text" attrs="{'invisible': [('active_session_count', '&gt;', 1)]}"> Active Session</span>
+                            </div>
+                        </button>
+                    </div>
                     <h1><field name="name"/></h1>
                     <group>
                         <group>

@@ -25,11 +25,24 @@ class Session(models.Model):
     instructor_id = fields.Many2one(comodel_name="res.users",
                                    string="Instructor",
                                    ondelete="restrict",
-                                   tracking=True)
+                                   tracking=True,)
     student_ids = fields.Many2many(comodel_name="res.partner",
                                    string="Students")
     description = fields.Text(related="course_id.description")
-
+    
+    # Kanban View Demo - Create Session Stage Model
+    stage_id = fields.Many2one('academy.session.stage')
+    state = fields.Selection(string='State', related="stage_id.state", readonly=False)
+    
+    #Status Example
+    kanban_state = fields.Selection(
+        [("normal", "In Progress"),
+         ("blocked", "Blocked"),
+         ("done", "Ready for next stage")],
+        "Kanban State",
+        default="normal")
+    color = fields.Integer()
+    
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

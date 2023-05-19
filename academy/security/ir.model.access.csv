@@ -5,3 +5,6 @@ course_read_all,course read all,model_academy_course,,1,0,0,0
 session_admin,session admin,model_academy_session,group_academy_admin,1,1,1,1
 session_user,session user,model_academy_session,group_academy_user,1,1,0,0
 session_read_all,session read all,model_academy_session,,1,0,0,0
+session_stage_admin,session_stage admin,model_academy_session_stage,group_academy_admin,1,1,1,1
+session_stage_user,session_stage user,model_academy_session_stage,group_academy_user,1,1,0,0
+session_stage_read_all,session_stage read all,model_academy_session_stage,,1,0,0,0
